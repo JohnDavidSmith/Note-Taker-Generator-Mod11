@@ -22,6 +22,14 @@
 
 ![Screenshot of the Note Taker Generator](./Assets/Note%20Taker%20Generator.png)
 
+## GitHub link
+
+[The Note Taker Generator](https://github.com/JohnDavidSmith/Note-Taker-Generator-Mod11)
+
+## Ddeployed to Heroku
+
+ https://shrouded-beach-53013.herokuapp.com/
+
 ## Credits
 * 
 
