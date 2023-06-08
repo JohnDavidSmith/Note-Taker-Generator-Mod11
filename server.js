@@ -6,20 +6,21 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
 // Serve the index.html file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Develop', 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
   
   // Serve the notes.html file
   app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Develop', 'public', 'notes.html'));
+    res.sendFile(path.join(__dirname, 'public', 'notes.html'));
   });
 
  // Read all saved notes from db.json
 app.get('/api/notes', (req, res) => {
-    fs.readFile(path.join(__dirname, 'Develop', 'db', 'db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'db', 'db.json'), 'utf8', (err, data) => {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'Failed to read notes.' });
@@ -35,7 +36,7 @@ app.get('/api/notes', (req, res) => {
     const newNote = req.body;
     newNote.id = uuidv4();
   
-    fs.readFile(path.join(__dirname, 'Develop', 'db', 'db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'db', 'db.json'), 'utf8', (err, data) => {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'Failed to save note.' });
@@ -44,7 +45,7 @@ app.get('/api/notes', (req, res) => {
         notes.push(newNote);
   
         fs.writeFile(
-          path.join(__dirname, 'Develop', 'db', 'db.json'),
+          path.join(__dirname, 'db', 'db.json'),
           JSON.stringify(notes),
           (err) => {
             if (err) {
